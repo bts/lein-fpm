@@ -12,13 +12,13 @@ uberjar`.
 
 ### System-wide install
 
-Put `[lein-fpm "0.1.0-SNAPSHOT"]` into the `:plugins` vector of your `:user`
+Put `[lein-fpm "0.1.0"]` into the `:plugins` vector of your `:user`
 profile, or if you are on Leiningen 1.x do `lein plugin install lein-fpm
-0.1.0-SNAPSHOT`.
+0.1.0`.
 
 ### Per-project install
 
-Put `[lein-fpm "0.1.0-SNAPSHOT"]` into the `:plugins` vector of your
+Put `[lein-fpm "0.1.0"]` into the `:plugins` vector of your
 project.clj.
 
 ### Running
