@@ -58,7 +58,7 @@
   "The JDK package name and version for the provided package type."
   [package-type]
   (condp = package-type
-    "deb" "openjdk-7-jre"
+    "deb" "openjdk-7-jre-headless"
     "rpm" "java-1.7.0-openjdk"
     "solaris" "jdk-7"))
 

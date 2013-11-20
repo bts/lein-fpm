@@ -35,8 +35,9 @@ This will produce a package in the `target` directory.
 
 #### Included dependencies
 
-By default, deb packages will depend on `openjdk-7-jre`, rpm packages will
-depend on `java-1.7.0-openjdk`, and solaris packages will depend on `jdk-7`.
+By default, deb packages will depend on `openjdk-7-jre-headless`, rpm packages
+will depend on `java-1.7.0-openjdk`, and solaris packages will depend on
+`jdk-7`.
 
 ## Caveats
 
