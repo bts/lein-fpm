@@ -27,7 +27,7 @@ lein-fpm will produce a deb by default:
 
     $ lein fpm
 
-or you can pass a specific target:
+or you can supply a specific target type:
 
     $ lein fpm rpm
 
@@ -41,7 +41,10 @@ depend on `java-1.7.0-openjdk`, and solaris packages will depend on `jdk-7`.
 ## Caveats
 
 At the moment, lein-fpm is quite simple and does not yet support configuration
-beyond the target type. Contributions are welcome!
+beyond the target type. Contributions and feedback are welcome! This project is
+a bit of an experimental tool I created in trying to produce the simplest
+packages that will usefully run within [immutable
+servers](http://martinfowler.com/bliki/ImmutableServer.html).
 
 ## Dependencies
 
