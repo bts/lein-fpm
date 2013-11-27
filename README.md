@@ -3,10 +3,10 @@
 A Leiningen plugin for generating minimalist packages using
 [fpm](https://github.com/jordansissel/fpm).
 
-Generated packages install a standalone jar for your project in `/usr/lib`, and
-a wrapper shell script in `/usr/bin` named after your project. lein-fpm assumes
-that your project can successfully build a functioning standalone jar via `lein
-uberjar`.
+Generated packages install a standalone jar for your project in `/usr/lib`, a
+wrapper shell script in `/usr/bin`, and an upstart script in `/etc/init`.
+lein-fpm assumes that your project can successfully build a functioning
+standalone jar via `lein uberjar`.
 
 ## Usage
 
