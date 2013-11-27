@@ -29,6 +29,11 @@
   [project]
   (io/file (:target-path project) (:name project)))
 
+(defn- bin-destination-path
+  "The full path to the binary wrapper once installed."
+  [project]
+  (io/file "/usr/bin" (:name project)))
+
 (defn- package-path
   "The full path to the output package."
   [project package-type]
@@ -80,11 +85,10 @@
 (defn- parameters
   "The parameters to be passed to fpm."
   [project]
-  (let [project-name (:name project)
-        jar-src (jar-path project)
+  (let [jar-src (jar-path project)
         jar-dest (jar-destination-path project)
         bin-src (bin-path project)
-        bin-dest "/usr/bin/git-server"]
+        bin-dest (bin-destination-path project)]
     [(str jar-src "=" jar-dest)
      (str bin-src "=" bin-dest)]))
 
