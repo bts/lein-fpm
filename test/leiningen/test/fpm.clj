@@ -28,9 +28,21 @@
              (str "#!/bin/bash\njava -jar " expected-jar-path
                   " -Xms256M -Xmx512M\n"))))))
 
+(deftest test-upstart-script
+  (let [contents (slurp (fpm/upstart-script project))
+        project-name (:name project)]
+    (is (= contents "#!upstart
+
+description \"project-name\"
+start on startup
+stop on shutdown
+respawn
+exec /usr/bin/project-name\n"))))
+
 (deftest test-package
   (let [target-path (:target-path project)
         _ (fpm/wrapper-binary project)
+        _ (fpm/upstart-script project)
         _ (fs/touch (io/file target-path jar-file-name))
         package (fpm/package project "deb")]
     (is (fs/exists? package))

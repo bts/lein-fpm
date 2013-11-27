@@ -34,6 +34,16 @@
   [project]
   (io/file "/usr/bin" (:name project)))
 
+(defn- upstart-path
+  "The full path to the upstart script on this system."
+  [project]
+  (io/file (:target-path project) (str (:name project) ".conf")))
+
+(defn- upstart-destination-path
+  "The full path to the upstart script once installed."
+  [project]
+  (io/file "/etc/init" (str (:name project) ".conf")))
+
 (defn- package-path
   "The full path to the output package."
   [project package-type]
@@ -51,13 +61,28 @@
 (defn wrapper-binary
   "Writes a wrapper binary to :target-path/bin and returns its path."
   [project]
-  (let [binary (bin-path project)
+  (let [file (bin-path project)
         shebang "#!/bin/bash"
         contents (str shebang "\n" (jar-invocation project) "\n")
-        _ (fs/mkdirs (fs/parent binary))
-        _ (spit binary contents)
-        _ (fs/chmod "+x" binary)]
-    binary))
+        _ (fs/mkdirs (fs/parent file))
+        _ (spit file contents)
+        _ (fs/chmod "+x" file)]
+    file))
+
+(defn upstart-script
+  "Writes an upstart script and returns its path."
+  [project]
+  (let [file (upstart-path project)
+        project-name (:name project)
+        contents (str "#!upstart\n\n"
+                      "description \"" project-name "\"\n"
+                      "start on startup\n"
+                      "stop on shutdown\n"
+                      "respawn\n"
+                      "exec /usr/bin/" project-name "\n")
+        _ (fs/mkdirs (fs/parent file))
+        _ (spit file contents)]
+    file))
 
 (defn- jdk-dependency
   "The JDK package name and version for the provided package type."
@@ -88,9 +113,12 @@
   (let [jar-src (jar-path project)
         jar-dest (jar-destination-path project)
         bin-src (bin-path project)
-        bin-dest (bin-destination-path project)]
+        bin-dest (bin-destination-path project)
+        upstart-src (upstart-path project)
+        upstart-dest (upstart-destination-path project)]
     [(str jar-src "=" jar-dest)
-     (str bin-src "=" bin-dest)]))
+     (str bin-src "=" bin-dest)
+     (str upstart-src "=" upstart-dest)]))
 
 (defn- warnln
   "Prints a message to stderr."
@@ -122,5 +150,7 @@
    (uberjar/uberjar project)
    (println "Creating wrapper binary")
    (wrapper-binary project)
+   (println "Creating upstart script")
+   (upstart-script project)
    (println "Building package")
    (package project package-type)))
