@@ -92,18 +92,25 @@
     [(str jar-src "=" jar-dest)
      (str bin-src "=" bin-dest)]))
 
+(defn- warnln
+  "Prints a message to stderr."
+  [message]
+  (binding [*out* *err*]
+    (println message)))
+
 (defn package
   "Invokes fpm to build the package and returns the resulting path."
   [project package-type]
   (let [command-strings (concat ["fpm"]
                                 (flatten (options project package-type))
                                 (parameters project))
-        ;; fpm does not seem to print to stderr:
-        {:keys [exit out]} (apply shell/sh command-strings)]
-    (println (string/trim-newline out))
+        {:keys [exit out err]} (apply shell/sh command-strings)]
+    (when-not (empty? out)
+      (println (string/trim-newline out)))
+    (when-not (empty? err)
+      (warnln (string/trim-newline err)))
     (when (pos? exit)
-      (binding [*out* *err*]
-        (println "Failed to build package!"))
+      (warnln "Failed to build package!")
       (System/exit exit))
     (package-path project package-type)))
 

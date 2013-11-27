@@ -1,4 +1,4 @@
-(defproject lein-fpm "0.1.1"
+(defproject lein-fpm "0.2.0-SNAPSHOT"
   :description "A Leiningen plugin for generating minimalist packages using fpm."
   :url "http://github.com/bts/lein-fpm"
   :license {:name "MIT License"
