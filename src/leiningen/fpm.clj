@@ -105,7 +105,8 @@
    ["-v" (:version project)]
    ["--url" (:url project)]
    ["--description" (:description project)]
-   ["-d" (jdk-dependency package-type)]])
+   ["-d" (jdk-dependency package-type)]
+   ["--rpm-os" "linux"]])
 
 (defn- parameters
   "The parameters to be passed to fpm."
