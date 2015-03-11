@@ -55,8 +55,10 @@
   [project]
   (let [jar-path (jar-destination-path project)
         opts (:jvm-opts project)
-        opts-string (when opts (str " " (string/join " " opts)))]
-    (string/trimr (str "java" opts-string " -jar " jar-path))))
+        init-string (if (not (empty? opts))
+                      (str "java " (string/join " " opts) " -jar")  
+                      "java -jar")]
+    (string/join " " [init-string jar-path "$@"])))
 
 (defn wrapper-binary
   "Writes a wrapper binary to :target-path/bin and returns its path."
