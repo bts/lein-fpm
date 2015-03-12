@@ -1,6 +1,6 @@
 # lein-fpm
 
-A Leiningen plugin for generating simple packages using
+A Leiningen plugin for building simple packages using
 [fpm](https://github.com/jordansissel/fpm).
 
 Generated packages install a standalone JAR for your project in `/usr/lib`, a
