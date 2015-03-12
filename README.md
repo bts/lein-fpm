@@ -1,9 +1,9 @@
 # lein-fpm
 
-A Leiningen plugin for generating minimalist packages using
+A Leiningen plugin for generating simple packages using
 [fpm](https://github.com/jordansissel/fpm).
 
-Generated packages install a standalone jar for your project in `/usr/lib`, a
+Generated packages install a standalone JAR for your project in `/usr/lib`, a
 wrapper shell script in `/usr/bin`, and an upstart script in `/etc/init`.
 lein-fpm assumes that your project can successfully build a functioning
 standalone jar via `lein uberjar`.
@@ -12,14 +12,11 @@ standalone jar via `lein uberjar`.
 
 ### System-wide install
 
-Put `[lein-fpm "0.2.2"]` into the `:plugins` vector of your `:user`
-profile, or if you are on Leiningen 1.x do `lein plugin install lein-fpm
-0.2.2`.
+Put `[lein-fpm "0.2.3"]` into the `:plugins` vector of your `:user` profile.
 
 ### Per-project install
 
-Put `[lein-fpm "0.2.2"]` into the `:plugins` vector of your
-project.clj.
+Put `[lein-fpm "0.2.3"]` into the `:plugins` vector of your project.clj.
 
 ### Running
 
@@ -55,6 +52,6 @@ creating rpms.
 
 ## License
 
-Copyright © 2013 Brian Schroeder
+Copyright © 2015 Brian Schroeder
 
 Distributed under the MIT License.
