@@ -8,6 +8,8 @@ wrapper shell script in `/usr/bin`, and an upstart script in `/etc/init`.
 lein-fpm assumes that your project can successfully build a functioning
 standalone jar via `lein uberjar`.
 
+[![Clojars Project](http://clojars.org/lein-fpm/latest-version.svg)](http://clojars.org/lein-fpm)
+
 ## Usage
 
 ### System-wide install
