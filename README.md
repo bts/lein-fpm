@@ -20,7 +20,7 @@ Put `[lein-fpm "0.2.3"]` into the `:plugins` vector of your `:user` profile.
 
 Put `[lein-fpm "0.2.3"]` into the `:plugins` vector of your project.clj.
 
-### Running
+### Building a package
 
 lein-fpm will produce a deb by default:
 
@@ -37,6 +37,21 @@ This will produce a package in the `target` directory.
 By default, deb packages will depend on `openjdk-7-jre-headless`, rpm packages
 will depend on `java-1.7.0-openjdk`, and solaris packages will depend on
 `jdk-7`.
+
+### Using a package
+
+Install the package using the appropriate package manager, then start the application with upstart:
+
+```bash
+$ sudo start APP-NAME
+APP-NAME start/running, process 27699
+$ status APP-NAME
+APP-NAME start/running, process 27699
+$ sudo restart APP-NAME
+APP-NAME start/running, process 27743
+$ sudo stop APP-NAME
+APP-NAME stop/waiting
+```
 
 ## Caveats
 
