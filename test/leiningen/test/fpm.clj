@@ -21,12 +21,12 @@
         expected-jar-path (str "/usr/lib/project-name/" jar-file-name)]
     (testing "without jvm options"
       (is (= (binary-contents project)
-             (str "#!/bin/bash\njava -jar " expected-jar-path "\n"))))
+             (str "#!/bin/bash\njava -jar " expected-jar-path " $@\n"))))
     (testing "with jvm options"
       (is (= (binary-contents
                (assoc project :jvm-opts ["-Xms256M" "-Xmx512M"]))
-             (str "#!/bin/bash\njava -jar " expected-jar-path
-                  " -Xms256M -Xmx512M\n"))))))
+             (str "#!/bin/bash\njava -Xms256M -Xmx512M"
+                  " -jar " expected-jar-path " $@\n"))))))
 
 (deftest test-upstart-script
   (let [contents (slurp (fpm/upstart-script project))
